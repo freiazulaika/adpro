@@ -52,9 +52,9 @@ public class EditProductFunctionalTest {
         WebElement saveButton = driver.findElement(By.cssSelector(".btn-success"));
 
         nameInput.clear();
-        nameInput.sendKeys("EDITED PRODUCT");
+        nameInput.sendKeys("Setelah Edit");
         quantityInput.clear();
-        quantityInput.sendKeys("150");
+        quantityInput.sendKeys("1234");
 
         saveButton.click();
 
@@ -62,7 +62,7 @@ public class EditProductFunctionalTest {
         String updatedName = driver.findElement(By.className("product-card")).getText();
 
         assertNotEquals(initialName, updatedName);
-        assertTrue(updatedName.contains("EDITED PRODUCT"));
+        assertTrue(updatedName.contains("Setelah Edit"));
     }
 
     @Test
@@ -84,8 +84,8 @@ public class EditProductFunctionalTest {
         WebElement quantityInput = driver.findElement(By.id("quantityInput"));
         WebElement saveButton = driver.findElement(By.cssSelector(".btn.btn-primary"));
 
-        nameInput.sendKeys("TEST PRODUCT");
-        quantityInput.sendKeys("100");
+        nameInput.sendKeys("Functional Test");
+        quantityInput.sendKeys("1000");
         saveButton.click();
     }
 }
