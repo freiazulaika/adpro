@@ -37,10 +37,56 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testCreateNoID() {
+        Product product = new Product();
+        product.setProductName("Kecap Bango");
+        product.setProductQuantity(123);
+        productRepository.create(product);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct = productIterator.next();
+        assertEquals(product.getProductId(), savedProduct.getProductId());
+        assertEquals(product.getProductName(), savedProduct.getProductName());
+        assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
+    }
+
+    @Test
     void testFindAllIfEmpty() {
         Iterator<Product> productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testFindById() {
+        Product product = new Product();
+        product.setProductId("1128");
+        product.setProductName("Test Find by Id");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+        Product check = productRepository.findProductById("1128");
+    }
+
+    @Test
+    void testEditProduct() {
+        Product product = new Product();
+        product.setProductId("1128");
+        product.setProductName("Test Before Edit");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+
+        Product newProduct = new Product();
+        newProduct.setProductId("1128");
+        newProduct.setProductName("Test After Edit");
+        newProduct.setProductQuantity(110);
+        productRepository.edit(newProduct);
+
+        Product editFailed = new Product();
+        editFailed.setProductId("1");
+        editFailed.setProductName("FAIL");
+        productRepository.edit(editFailed);
+    }
+
     @Test
     void testFindAllIfMoreThanOneProduct() {
         Product product1 = new Product();
