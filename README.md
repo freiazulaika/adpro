@@ -5,6 +5,8 @@ NPM: 2306152254
 
 Kelas: A
 
+Deplyoment link: https://eshop-advprog-freiazulaika-8ebdba4e.koyeb.app/
+
 ## Modul 1
 ### Reflection 1
 
