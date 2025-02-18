@@ -33,8 +33,7 @@ public class ProductRepository {
     }
 
     public Product edit(Product newData) {
-        for (int i = 0; i < productData.size(); i++) {
-            Product prevData = productData.get(i);
+        for (Product prevData : productData) {
             if (prevData.getProductId().equals(newData.getProductId())) {
                 prevData.setProductName(newData.getProductName());
                 prevData.setProductQuantity(newData.getProductQuantity());
@@ -43,12 +42,8 @@ public class ProductRepository {
         }
         return null;
     }
+
     public void delete(String productId) {
-        for (int i = 0; i < productData.size(); i++) {
-            if (productData.get(i).getProductId().equals(productId)) {
-                productData.remove(i);
-                break;
-            }
-        }
+        productData.removeIf(product -> product.getProductId().equals(productId));
     }
 }
