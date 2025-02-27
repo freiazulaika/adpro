@@ -87,3 +87,30 @@ Aspek yang dapat ditingkatkan antara lain:
 > Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
 
 Pada proyek ini, saya menerapkan _Continuous Integration_ (CI) dengan membuat workflow `ci.yml`. Langkah ini akan secara otomatis menjalankan semua unit test saat push atau pull request. Kemudian, program akan dilanjutkan ke PMD untuk dilakukan _scanning code_ dan _analysis_. Langkah ini diperlukan untuk mengetahui kualitas kode serta _best practices_ yang dapat dilakukan. Setelah melakukan langkah-langkah tersebut, akan dilanjutkan ke langkah _Continuous Deployment/Delivery_ dengan mengintegrasikan dengan Koyeb sebagai platform _deployment_ otomatis.
+
+## Modul 3
+
+> Explain what principles you apply to your project!
+1. Single Responsibility Principle (SRP)
+
+Dalam proyek yang saya kerjakan, saya memisahkan class `CarController` dari class `ProductController`. Sebelum pengaplikasian SOLID, class `CarController` meng-_extend_ class `ProductController` serta berada di berkas yang sama dengan class `ProductController`. Setelah pengaplikasian SRP, class `CarController` berada di berkas yang berbeda serta tidak meng-_extend_ class `ProductController`, sehingga `CarController` tidak lagi terkait dengan `ProductController`.
+
+2. Liskov Substitution Principle (LSP)
+
+`CarServiceImpl` mengimplementasikan interface `CarService` dan dapat disubstitusi dimana pun `CarService` digunakan tanpa mengubah perilaku program.
+
+3. Interface Segregation Principle (ISP)
+
+Interface `CarService` memiliki method yang terfokus hanya pada operasi yang berhubungan dengan model `Car`.
+
+4. Dependency Inversion Principle (DIP)
+
+Class `CarController` bergantung pada interface `CarService` dan bukan berupa implementasi konkretnya.
+
+> Explain the advantages of applying SOLID principles to your project with examples.
+
+Penerapan prinsip SOLID pada proyek ini dapat meningkatkan kualitas kode, meningkatkan _readability_, serta memudahkan dalam mengembangkan kode. Dengan mengikuti prinsip-prinsip ini, kita dapat membuat sistem yang lebih mudah untuk di-_maintain_ serta lebih fleksibel terhadap perubahan kebutuhan di masa depan. Sebagai contoh, pemisahan `CarService` dari `CarController` memungkinkan kita untuk mengubah logika bisnis mobil (seperti menambahkan validasi) tanpa harus memodifikasi kode _controller_. Contoh lainnya adalah penggunaan interface `CarService` yang memungkinkan kita untuk mengganti implementasi penyimpanan data dari _in-memory_ list ke _database_ tanpa perlu mengubah kode di controller.
+
+> Explain the disadvantages of not applying SOLID principles to your project with examples.
+
+Jika tidak menerapkan SOLID, pengembangan dan pemeliharaan kode akan menjadi lebih susah dan terhambat, selain itu _readability_ kode juga akan berkurang dan akan membuat pembaca menjadi bingung. Sebagai contoh, jika kita ingin menguji `CarController`, maka kita harus melakukan _setup_ di seluruh sistem termasuk _repository_. Duplikasi kode sangat mungkin terjadi di berbagai tempat, seperti logika pengambilan data `Car` yang sama harus ditulis ulang di setiap bagian yang membutuhkannya.
