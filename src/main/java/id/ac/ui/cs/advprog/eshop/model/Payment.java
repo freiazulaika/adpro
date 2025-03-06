@@ -1,41 +1,37 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import enums.PaymentMethod;
+import enums.PaymentStatus;
 import lombok.Getter;
 
 import java.util.Map;
 
 @Getter
 public class Payment {
-    private final String id;
-    private final String method;
+    private String id;
+    private String method;
     private String status;
-    private final Map<String, String> paymentData;
-
-    private static final String[] VALID_METHODS = {"BANK_TRANSFER", "VOUCHER_CODE"};
+    private Map<String, String> paymentData;
 
     public Payment(String id, String method, Map<String, String> paymentData) {
+        if (!PaymentMethod.contains(method)) {
+            throw new IllegalArgumentException("Unsupported payment method: " + method);
+        }
         this.id = id;
-        this.method = validateMethod(method);
+        this.method = method;
         this.paymentData = paymentData;
         this.status = validatePayment();
     }
 
-    private String validateMethod(String method) {
-        if (java.util.Arrays.stream(VALID_METHODS).noneMatch(valid -> valid.equals(method))) {
-            throw new IllegalArgumentException("Unsupported payment method: " + method);
-        }
-        return method;
-    }
-
     private String validatePayment() {
         if (paymentData == null) {
-            return "REJECTED";
+            return PaymentStatus.REJECTED.getValue();
         }
 
         return switch (method) {
-            case "BANK_TRANSFER" -> validateBankTransfer() ? "SUCCESS" : "REJECTED";
-            case "VOUCHER_CODE" -> validateVoucherCode() ? "SUCCESS" : "REJECTED";
-            default -> "REJECTED";
+            case "BANK_TRANSFER" -> validateBankTransfer() ? PaymentStatus.SUCCESS.getValue() : PaymentStatus.REJECTED.getValue();
+            case "VOUCHER_CODE" -> validateVoucherCode() ? PaymentStatus.SUCCESS.getValue() : PaymentStatus.REJECTED.getValue();
+            default -> PaymentStatus.REJECTED.getValue();
         };
     }
 
@@ -68,7 +64,7 @@ public class Payment {
     }
 
     public void setStatus(String status) {
-        if (!"SUCCESS".equals(status) && !"REJECTED".equals(status)) {
+        if (!PaymentStatus.contains(status)) {
             throw new IllegalArgumentException("Invalid status change: " + status);
         }
         this.status = status;
