@@ -114,3 +114,13 @@ Penerapan prinsip SOLID pada proyek ini dapat meningkatkan kualitas kode, mening
 > Explain the disadvantages of not applying SOLID principles to your project with examples.
 
 Jika tidak menerapkan SOLID, pengembangan dan pemeliharaan kode akan menjadi lebih susah dan terhambat, selain itu _readability_ kode juga akan berkurang dan akan membuat pembaca menjadi bingung. Sebagai contoh, jika kita ingin menguji `CarController`, maka kita harus melakukan _setup_ di seluruh sistem termasuk _repository_. Duplikasi kode sangat mungkin terjadi di berbagai tempat, seperti logika pengambilan data `Car` yang sama harus ditulis ulang di setiap bagian yang membutuhkannya.
+
+## Modul 4
+
+> Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.
+
+Setelah mengerjakan tutorial 4, saya merasa TDD bisa membantu saya untuk memastikan kebenaran program yang dikembangkan. TDD dapat membantu saya untuk menemukan bug di awal pengembangan dan cukup memberikan kemudahan untuk melakukan perubahan kode. Namun, saya juga merasa bahwa bahwa pembuatan program berdasarkan TDD lebih menghabiskan banyak waktu karena harus memikirkan test yang tepat dan dapat meng-cover seluruh fungsi yang ada. 
+
+> You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.
+
+Menurut saya, semua test yang telah saya buat pada tutorial ini kurang lebih sudah memenuhi F.I.R.S.T. principle. Tes yang saya buat cenderung berjalan dengan cepat karena tidak terlalu kompleks, isolated karena saya memisahkan setiap kemungkinan test dengan testnya sendiri, dan memiliki validitas dengan assertions yang sesuai. Namun, saya masih kurang yakin apakah semua kemungkinan kasus sudah dicakup (thorough). Contohnya seperti semua kemungkinan happy dan unhappy path yang harus dicover, meskipun saya telah berusaha memisahkan tes untuk memastikan cakupan yang lebih komprehensif.
